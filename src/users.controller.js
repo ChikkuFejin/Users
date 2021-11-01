@@ -6,7 +6,7 @@ class Users{
 constructor(){
     let localData=window.localStorage.getItem(this.localkey);
     this.data=localData&&JSON.parse(localData)||[];
-    console.log('this',this.data,this);
+
 }
  index(){
 

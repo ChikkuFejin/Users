@@ -17,7 +17,7 @@ export default function UserCreateModal({
     }
     const [formData,setFormData]=useState(intialFormData)
   const validationInput=(e)=>{
-    let {name,value,type,required}=e.target;
+    let {name,value,required}=e.target;
     let err="";
     const regExpEmail = /^([a-zA-Z0-9-_\.]+)@([a-zA-Z0-9]+)\.([a-zA-Z]{2,10})(\.[a-zA-Z]{2,8})?$/
     const regExpPhone = /^\d{10}$/
@@ -115,8 +115,7 @@ const formInputs={
     const handleInputChange=(e)=>{
         
       const {name,value,type,required,dataValidate}=e.target;
-      console.log("validate",dataValidate);
-      console.log('validationInput(e)',validationInput(e))
+    
       let ValidateValue=validationInput(e);
       if(ValidateValue){
         errorData[name]=ValidateValue;
@@ -159,7 +158,7 @@ const formInputs={
         
         
         await usersController.createOrUpdate(formData).then(res=>{
-          console.log(res);
+        
           setFormData(intialFormData);
       
           toast.success(res.message);
@@ -184,13 +183,14 @@ const formInputs={
             <Modal.Title className="h6" >Add User</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            {console.log(errorData)}
+           
               <form onSubmit={formSubmit}>
                   <div className="row">
                     {
                       Object.keys(formInputs)?.length>0&&(
                         Object.keys(formInputs).map((input,idx)=>{
                          return <InputForm
+                         key={idx+1}
                             name={input}
                             value={formData[input]}
                             required={formInputs[input].required||false}
@@ -229,7 +229,7 @@ const formInputs={
     keys,inputType
 
   }){
-    {console.log(name)}
+    
     return (
       <div className="col-12 form-group mb-3" key={keys+1}>
       <label>{label} {required&&<span className="text-danger">*</span>}</label>

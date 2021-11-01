@@ -15,7 +15,7 @@ function Users() {
     usersController.index().then(res=>{
 
     setUsersData(res.data);
-    // console.log(res)
+
     }).catch(e=>console.error(e));
 }
 useEffect(()=>{

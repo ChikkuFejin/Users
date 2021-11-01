@@ -13,7 +13,7 @@ function ActionButton({
         await usersController.createOrUpdate(userData).then(res=>{
             getAllUsers();
             toast.success(res.message)
-        }).catch(e=>console.log(e.message));
+        }).catch(e=>console.error(e.message));
         
     }
 
