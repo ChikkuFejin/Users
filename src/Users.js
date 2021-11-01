@@ -1,8 +1,9 @@
 import Layout from "./components/layout";
 import Head from './components/Head';
-import { useState } from "react";
+import { useState ,useEffect} from "react";
 import DataTable from './components/DataTable';
 import UserCreateModal from "./components/UserCreateModal";
+import usersController from "./users.controller";
 
 function Users() {
   const usersJsonData=require('./users.json');
@@ -10,6 +11,16 @@ function Users() {
   const [usersData,setUsersData]=useState(usersJsonData);
 
 
+  const getAllUsers=async ()=>{
+    usersController.index().then(res=>{
+
+    setUsersData(res.data);
+    // console.log(res)
+    }).catch(e=>console.error(e));
+}
+useEffect(()=>{
+  getAllUsers();
+},[])
   return (
     <Layout>
           <Head
@@ -17,13 +28,14 @@ function Users() {
             button={<UserCreateModal
               setUsersData={setUsersData}
               usersData={usersData}
+              getAllUsers={getAllUsers}
             
             />}
           />
+          
           <DataTable
-            userData={usersData}
             usersData={usersData}
-            setUsersData={setUsersData}
+            getAllUsers={getAllUsers}
           />
 
     </Layout>

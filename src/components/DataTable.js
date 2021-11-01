@@ -2,15 +2,10 @@ import React from 'react'
 import ActionButton from './ActionButton'
 
 function DataTable({
-    userData,
-    usersData,setUsersData,
- 
+    usersData,
+    getAllUsers
 }) {
 
-    // const DeleteUser=(id)=>{
-    //     // alert(id);
-    //     setUsersData(usersData.filter(i=>i.id!==id))
-    // }
     return (
         <div className="p-3 shadow">
             <table className="table table-borderless">
@@ -26,7 +21,7 @@ function DataTable({
                 </thead>
                 <tbody>
                     {
-                        userData?.map((user,idx)=>(
+                        usersData?.map((user,idx)=>(
                             <tr className={`border border-light ${user.status?"data-row-success":'data-row-danger'}`} key={idx+1}>
                                 <td>{idx+1}</td>
                                 <td>{user.name}</td>
@@ -41,9 +36,8 @@ function DataTable({
                                         <ActionButton
                                         isChecked={user.status}
                                         userData={user}
-                                        usersData={usersData}
-                                        setUsersData={setUsersData}
                                         type="switch"
+                                        getAllUsers={getAllUsers}
                                         />
                                     
                                 </td>

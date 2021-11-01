@@ -1,19 +1,20 @@
 import React from 'react'
+import { toast } from 'react-toastify';
+import usersController from '../users.controller';
 
 function ActionButton({
    isChecked,
    userData,
-   usersData,
-   setUsersData,
-   label,
-   buttonClassName,
-   type,
-   handleClick
+   getAllUsers
 }) {
-    const handleChange=(e)=>{
+    const handleChange=async (e)=>{
         const {checked}=e.target;
         userData.status=checked;
-        setUsersData(usersData.map(i=>i.id===userData.id?userData:i));
+        await usersController.createOrUpdate(userData).then(res=>{
+            getAllUsers();
+            toast.success(res.message)
+        }).catch(e=>console.log(e.message));
+        
     }
 
 
